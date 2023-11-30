@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background-color: coral;
   position: relative;
@@ -23,15 +23,19 @@ const Arrow = styled.div`
   right: ${(props) => props.direction === 'right' && '10px'};
   margin: auto;
   opacity: 0.5;
+  z-index: 2;
 `;
 const Wrapper = styled.div`
   height: 100vh;
+  display: flex;
+  transform: translateX(0vw);
 `;
 const Slide = styled.div`
-  disply: flex;
+  display: flex;
   align-items: center;
   width: 100vw;
   height: 100vh;
+  background-color: #${(props) => props.bg};
 `;
 const ImgContainer = styled.div`
   flex: 1;
@@ -50,27 +54,66 @@ const Title = styled.h1`
 `;
 const Description = styled.p`
   margin: 50px 0px;
+  font-weight: 500;
+  letter-spacing: 3px;
 `;
-const Button = styled.button``;
+const Button = styled.button`
+  padding: 10px;
+  font-size: 20px;
+  background-color: transparent;
+  cursor: pointer;
+`;
 const Slider = () => {
+  const [slideIndex, setSlideIndex] = useState(0);
+  const handleClick = (direction) => {};
   return (
     <Container>
-      <Arrow direction="left">
+      <Arrow
+        direction="left"
+        onClick={() => {
+          handleClick('left');
+        }}
+      >
         <ArrowLeftOutlined />
       </Arrow>
       <Wrapper>
-        <Slide>
+        <Slide bg="f5fafd">
           <ImgContainer>
             <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEFHp7yBqYJ2MoMR_nop4Mg0MRURFCAAiCFm-SyUi-ousYYgeBsqoHfihUcec_t3RWv-Y&usqp=CAU" />
           </ImgContainer>
           <InfoContainer>
-            <Title></Title>
-            <Description></Description>
-            <Button></Button>
+            <Title>Summer Sale!!</Title>
+            <Description>Get Flat 30% off on our new arrivals</Description>
+            <Button>SHOW NOW</Button>
+          </InfoContainer>
+        </Slide>
+        <Slide bg="fcf1ed">
+          <ImgContainer>
+            <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEFHp7yBqYJ2MoMR_nop4Mg0MRURFCAAiCFm-SyUi-ousYYgeBsqoHfihUcec_t3RWv-Y&usqp=CAU" />
+          </ImgContainer>
+          <InfoContainer>
+            <Title>Spring Sale!!!</Title>
+            <Description>Get Flat 30% off on our new arrivals</Description>
+            <Button>SHOW NOW</Button>
+          </InfoContainer>
+        </Slide>
+        <Slide bg="fbf0f4">
+          <ImgContainer>
+            <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEFHp7yBqYJ2MoMR_nop4Mg0MRURFCAAiCFm-SyUi-ousYYgeBsqoHfihUcec_t3RWv-Y&usqp=CAU" />
+          </ImgContainer>
+          <InfoContainer>
+            <Title>Winter Sale!!!</Title>
+            <Description>Get Flat 30% off on our new arrivals</Description>
+            <Button>SHOW NOW</Button>
           </InfoContainer>
         </Slide>
       </Wrapper>
-      <Arrow direction="right">
+      <Arrow
+        direction="right"
+        onClick={() => {
+          handleCLick('right');
+        }}
+      >
         <ArrowRightOutlined />
       </Arrow>
     </Container>
