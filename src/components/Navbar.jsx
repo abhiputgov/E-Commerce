@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   padding: 10px 20px;
   display: flex;
   justify-content: Space-between;
+  position: relative;
 `;
 const Left = styled.div`
   flex: 1;
@@ -20,6 +21,9 @@ const Center = styled.div`
   text-align: center;
   align-items: center;
   justify-content: center;
+  right: 0;
+  left: 0;
+  position: absolute;
 `;
 const Right = styled.div`
   flex: 1;
