@@ -1,10 +1,11 @@
 require('dotenv').config();
-const app = require('express')();
+const express = require('express');
+const app = express();
 const mongoose = require('mongoose');
+const userRoute = require('./routes/users');
 
-app.get('/api/test', () => {
-  console.log('first test is successful');
-});
+app.use(express.json());
+app.use('/api/user', userRoute);
 
 const start = async () => {
   try {
