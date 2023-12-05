@@ -2,10 +2,16 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const userRoute = require('./routes/users');
+const userRoute = require('./routes/user');
+const cartRoute = require('./routes/cart');
+const productRoute = require('./routes/product');
+const orderRoute = require('./routes/order');
 
 app.use(express.json());
 app.use('/api/user', userRoute);
+app.use('/api/cart', cartRoute);
+app.use('/api/product', productRoute);
+app.use('/api/order', orderRoute);
 
 const start = async () => {
   try {
