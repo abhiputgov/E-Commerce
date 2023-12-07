@@ -6,8 +6,10 @@ const userRoute = require('./routes/user');
 const cartRoute = require('./routes/cart');
 const productRoute = require('./routes/product');
 const orderRoute = require('./routes/order');
+const authRoute = require('./routes/auth');
 
 app.use(express.json());
+app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);
 app.use('/api/cart', cartRoute);
 app.use('/api/product', productRoute);
