@@ -26,4 +26,16 @@ const verifyAndAuthorize = async (req, res, next) => {
   });
 };
 
-module.exports = { verifyToken, verifyAndAuthorize };
+const verifyTokenAndAdminVerify = async (req, res, next) => {
+  verifyToken(req, res, () => {
+    if (req.user.isAdmin) {
+      next();
+    } else {
+      return res
+        .status(403)
+        .json('You are not an admin. So you are not allowed to do that');
+    }
+  });
+};
+
+module.exports = { verifyToken, verifyAndAuthorize, verifyTokenAndAdminVerify };
