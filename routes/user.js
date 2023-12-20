@@ -23,8 +23,8 @@ router.put('/:id', verifyAndAuthorize, async (req, res) => {
       { new: true },
     );
 
-    const { password, ...others } = updatedUser;
-    res.status(200).json(others._doc);
+    const { password, ...others } = updatedUser._doc;
+    res.status(200).json(others);
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -42,8 +42,8 @@ router.delete('/:id', verifyAndAuthorize, async (req, res) => {
 router.get('/:id', verifyTokenAndAdminVerify, async (req, res) => {
   try {
     const fetchedUser = await User.findById(req.params.id);
-    const { password, ...others } = fetchedUser;
-    res.status(200).json(others._doc);
+    const { password, ...others } = fetchedUser._doc;
+    res.status(200).json(others);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -55,7 +55,8 @@ router.get('/', verifyTokenAndAdminVerify, async (req, res) => {
     const allFetchedUsers = query
       ? await User.find().sort({ _id: -1 }).limit(1)
       : await User.find();
-    res.status(200).json(allFetchedUsers);
+    const { password, ...others } = allFetchedUsers;
+    res.status(200).json(others);
   } catch (error) {
     res.status(500).json(error);
   }
