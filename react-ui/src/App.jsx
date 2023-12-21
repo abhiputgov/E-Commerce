@@ -4,8 +4,7 @@ import ProductList from './pages/ProductList';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
-import styled from 'styled-components';
-import Payments from './pages/Payments';
+import ErrorPage from './pages/RouteError';
 import {
   createBrowserRouter,
   Outlet,
@@ -20,11 +19,23 @@ const App = () => {
       path: '/',
       element: <Outlet />,
       children: [
-        { path: '/', element: <Home /> },
-        { path: '/products', element: <ProductList /> },
-        { path: '/products/:category', element: <ProductList /> },
-        { path: '/products/product/:id', element: <Product /> },
-        { path: '/cart', element: <Cart /> },
+        { path: '/', element: <Home />, errorElement: <ErrorPage /> },
+        {
+          path: '/products',
+          element: <ProductList />,
+          errorElement: <ErrorPage />,
+        },
+        {
+          path: '/products/:category',
+          element: <ProductList />,
+          errorElement: <ErrorPage />,
+        },
+        {
+          path: '/products/product/:id',
+          element: <Product />,
+          errorElement: <ErrorPage />,
+        },
+        { path: '/cart', element: <Cart />, errorElement: <ErrorPage /> },
         {
           path: '/login',
           element: <Login />,
@@ -35,6 +46,7 @@ const App = () => {
               return null;
             }
           },
+          errorElement: <ErrorPage />,
         },
         {
           path: '/register',
@@ -46,6 +58,7 @@ const App = () => {
               return null;
             }
           },
+          errorElement: <ErrorPage />,
         },
       ],
     },
