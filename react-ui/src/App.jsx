@@ -6,10 +6,15 @@ import Login from './pages/Login';
 import Cart from './pages/Cart';
 import styled from 'styled-components';
 import Payments from './pages/Payments';
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  Outlet,
+  redirect,
+  RouterProvider,
+} from 'react-router-dom';
 
 const App = () => {
-  const loggedIn = true;
+  const loggedIn = false;
   const router = createBrowserRouter([
     {
       path: '/',
@@ -20,8 +25,28 @@ const App = () => {
         { path: '/products/:category', element: <ProductList /> },
         { path: '/products/product/:id', element: <Product /> },
         { path: '/cart', element: <Cart /> },
-        { path: '/login', element: <Login /> },
-        { path: '/register', element: <Register /> },
+        {
+          path: '/login',
+          element: <Login />,
+          loader: async () => {
+            if (loggedIn) {
+              return redirect('/');
+            } else {
+              return null;
+            }
+          },
+        },
+        {
+          path: '/register',
+          element: <Register />,
+          loader: async () => {
+            if (loggedIn) {
+              return redirect('/');
+            } else {
+              return null;
+            }
+          },
+        },
       ],
     },
   ]);
